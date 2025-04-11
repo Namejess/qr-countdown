@@ -3,20 +3,115 @@
   <head>
     <title>Compte à rebours</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin-top: 50px;
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: Arial;
       }
-      #countdown {
-        font-size: 3em;
-        color: #ff5722;
+
+      body {
+        background-color: #000;
+      }
+
+      main {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .timer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: #000;
+        position: relative;
+        padding: 20px;
+        padding-right: 5px;
+      }
+
+      .timer-display {
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        text-align: center;
+        width: 100px;
+      }
+
+      .timer-separator {
+        color: #fff;
+        font-size: 50px;
+        padding-left: 8px;
+        padding-right: 17px;
+      }
+
+      .timer:before,
+      .timer:after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(
+          to bottom right,
+          rgba(2, 99, 225, 1),
+          rgba(235, 24, 54, 1)
+        );
+        z-index: -1;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border-radius: 10px;
+        top: -2px;
+        left: -2px;
+        background-size: 500%;
+        animation: wandernderFarbverlauf 40s infinite;
+      }
+
+      @keyframes wandernderFarbverlauf {
+        0% {
+          background-position: 0 0;
+        }
+        50% {
+          background-position: 500% 0;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
+
+      .start-stop {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #fff;
+        transition: 1s ease-in-out;
+      }
+
+      .start-stop:hover {
+        cursor: pointer;
+        color: red;
+      }
+
+      .start-stop-active {
+        display: none;
       }
     </style>
   </head>
   <body>
-    <h1>Événement à venir!</h1>
-    <div id="countdown"></div>
+    <main>
+      <div class="timer">
+        <div class="timer-display" id="days">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="hours">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="minutes">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="seconds">00</div>
+      </div>
+      <div class="start-stop" id="event-status">
+        <p>Événement à venir</p>
+      </div>
+    </main>
 
     <script>
       // Lire la date depuis l'URL
@@ -35,12 +130,30 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("countdown").innerHTML =
-          `${days}j ${hours}h ${minutes}m ${seconds}s`;
+        // Formatage avec 2 chiffres
+        document.getElementById("days").textContent = String(days).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("hours").textContent = String(hours).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("minutes").textContent = String(
+          minutes,
+        ).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(
+          seconds,
+        ).padStart(2, "0");
 
         if (distance < 0) {
           clearInterval(countdownInterval);
-          document.getElementById("countdown").innerHTML = "C'est maintenant!";
+          document.getElementById("days").textContent = "00";
+          document.getElementById("hours").textContent = "00";
+          document.getElementById("minutes").textContent = "00";
+          document.getElementById("seconds").textContent = "00";
+          document.getElementById("event-status").innerHTML =
+            "<p>C'est maintenant!</p>";
         }
       }
 
