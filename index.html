@@ -19,6 +19,10 @@
     <div id="countdown"></div>
 
     <script>
+      // Lire la date depuis l'URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const dateParam = urlParams.get("date") || "2024-12-31T23:59:59"; // Fallback
+      const targetDate = new Date(dateParam).getTime();
       // Date cible (modifie cette valeur)
       const targetDate = new Date("2024-12-31T23:59:59").getTime();
 
