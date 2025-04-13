@@ -1,159 +1,193 @@
 <!doctype html>
-<html>
+<html lang="fr">
   <head>
-    <title>Compte à rebours</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Kermesse Approche...</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap");
+
       * {
         margin: 0;
         padding: 0;
-        font-family: Arial;
+        box-sizing: border-box;
       }
 
       body {
-        background-color: #000;
-      }
-
-      main {
+        background-color: #1a1a1a;
+        color: #ffd700;
+        font-family: "Oswald", sans-serif;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-      }
-
-      .timer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        background-color: #000;
-        position: relative;
         padding: 20px;
-        padding-right: 5px;
+        background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1px);
+        background-size: 20px 20px;
       }
 
-      .timer-display {
-        font-size: 50px;
-        background-color: transparent;
-        border: none;
-        color: #fff;
+      .header {
         text-align: center;
-        width: 100px;
+        margin-bottom: 30px;
+        width: 100%;
       }
 
-      .timer-separator {
-        color: #fff;
-        font-size: 50px;
-        padding-left: 8px;
-        padding-right: 17px;
+      .title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 4rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        text-shadow: 3px 3px 0px #8b0000;
       }
 
-      .timer:before,
-      .timer:after {
-        content: "";
-        position: absolute;
-        background: linear-gradient(
-          to bottom right,
-          rgba(2, 99, 225, 1),
-          rgba(235, 24, 54, 1)
-        );
-        z-index: -1;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-        border-radius: 10px;
-        top: -2px;
-        left: -2px;
-        background-size: 500%;
-        animation: wandernderFarbverlauf 40s infinite;
+      .subtitle {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
       }
 
-      @keyframes wandernderFarbverlauf {
-        0% {
-          background-position: 0 0;
-        }
-        50% {
-          background-position: 500% 0;
-        }
-        100% {
-          background-position: 0 0;
-        }
+      .countdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 30px 0;
+        width: 100%;
       }
 
-      .start-stop {
+      .countdown {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 5rem;
+        color: #ffd700;
+        text-shadow: 3px 3px 0px #8b0000;
+        margin-bottom: 10px;
+      }
+
+      .countdown-label {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .theme {
+        font-size: 3rem;
+        font-family: "Bebas Neue", sans-serif;
+        color: #ffffff;
+        text-shadow: 2px 2px 0px #8b0000;
+        margin: 20px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .clue {
+        font-size: 1.3rem;
+        text-align: center;
+        max-width: 600px;
+        margin: 20px auto;
+        line-height: 1.6;
+      }
+
+      .posters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: auto;
+        padding: 30px 0;
+        width: 100%;
+      }
+
+      .poster {
+        width: 200px;
+        height: 300px;
+        object-fit: cover;
+        border: 3px solid #ffd700;
+        border-radius: 5px;
+        transition: transform 0.3s;
+      }
+
+      .poster:hover {
+        transform: scale(1.05);
+      }
+
+      .footer {
         margin-top: 20px;
-        font-size: 20px;
-        color: #fff;
-        transition: 1s ease-in-out;
+        font-size: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
       }
 
-      .start-stop:hover {
-        cursor: pointer;
-        color: red;
-      }
+      @media (max-width: 768px) {
+        .title {
+          font-size: 2.5rem;
+        }
 
-      .start-stop-active {
-        display: none;
+        .subtitle {
+          font-size: 1.2rem;
+        }
+
+        .countdown {
+          font-size: 3rem;
+        }
+
+        .theme {
+          font-size: 2rem;
+        }
+
+        .poster {
+          width: 150px;
+          height: 225px;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <div class="timer">
-        <div class="timer-display" id="days">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="hours">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="minutes">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="seconds">00</div>
-      </div>
-      <div class="start-stop" id="event-status">
-        <p>Kermesse Espace Montessori Nancy</p>
-      </div>
-    </main>
+    <div class="header">
+      <h1 class="title">LA KERMESSE APPROCHE...</h1>
+      <h2 class="subtitle">SAURAS-TU DEVINER LE THÈME?</h2>
+    </div>
+
+    <div class="countdown-container">
+      <div class="countdown" id="countdown">29</div>
+      <div class="countdown-label">JOURS</div>
+    </div>
+
+    <div class="theme">WESTERN</div>
+
+    <p class="clue">
+      UNE SEULE DE CES PISTES EST LA BONNE...<br />A TOI DE LA TROUVER!
+    </p>
+
+    <div class="posters">
+      <!-- Remplace ces noms de fichiers par les noms de tes images -->
+      <img src="poster1.jpg" alt="Affiche 1" class="poster" />
+      <img src="poster2.jpg" alt="Affiche 2" class="poster" />
+      <img src="poster3.jpg" alt="Affiche 3" class="poster" />
+      <img src="poster4.jpg" alt="Affiche 4" class="poster" />
+    </div>
+
+    <div class="footer">RENDEZ-VOUS A LA KERMESSE POUR LE DECOUVRIR</div>
 
     <script>
-      // Lire la date depuis l'URL
-      const urlParams = new URLSearchParams(window.location.search);
-      const dateParam = urlParams.get("date") || "2024-12-31T23:59:59"; // Fallback
-      const targetDate = new Date(dateParam).getTime();
+      // Configuration de la date cible
+      const targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + 29); // 29 jours à partir d'aujourd'hui
 
       function updateCountdown() {
-        const now = new Date().getTime();
+        const now = new Date();
         const distance = targetDate - now;
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor(
-          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
-        );
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Formatage avec 2 chiffres
-        document.getElementById("days").textContent = String(days).padStart(
-          2,
-          "0",
-        );
-        document.getElementById("hours").textContent = String(hours).padStart(
-          2,
-          "0",
-        );
-        document.getElementById("minutes").textContent = String(
-          minutes,
-        ).padStart(2, "0");
-        document.getElementById("seconds").textContent = String(
-          seconds,
-        ).padStart(2, "0");
+        document.getElementById("countdown").textContent = days;
 
         if (distance < 0) {
           clearInterval(countdownInterval);
-          document.getElementById("days").textContent = "00";
-          document.getElementById("hours").textContent = "00";
-          document.getElementById("minutes").textContent = "00";
-          document.getElementById("seconds").textContent = "00";
-          document.getElementById("event-status").innerHTML =
-            "<p>C'est maintenant!</p>";
+          document.getElementById("countdown").textContent = "0";
+          document.querySelector(".countdown-label").textContent =
+            "C'EST MAINTENANT!";
         }
       }
 
