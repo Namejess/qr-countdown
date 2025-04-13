@@ -48,26 +48,38 @@
         letter-spacing: 2px;
       }
 
-      .countdown-container {
+      /* Compte à rebours circulaire */
+      .countdown-circle {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin: 30px auto;
+        border-radius: 50%;
+        background: #1a1a1a;
+        border: 5px solid #ffd700;
+        box-shadow:
+          0 0 0 5px #8b0000,
+          0 0 20px rgba(139, 0, 0, 0.5);
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        margin: 30px 0;
-        width: 100%;
       }
 
-      .countdown {
+      .countdown-time {
         font-family: "Bebas Neue", sans-serif;
-        font-size: 5rem;
+        font-size: 3.5rem;
         color: #ffd700;
-        text-shadow: 3px 3px 0px #8b0000;
-        margin-bottom: 10px;
+        text-shadow: 2px 2px 0px #8b0000;
+        text-align: center;
+        line-height: 1.2;
       }
 
       .countdown-label {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-top: 10px;
       }
 
       .theme {
@@ -88,27 +100,64 @@
         line-height: 1.6;
       }
 
-      .posters {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: auto;
-        padding: 30px 0;
-        width: 100%;
+      /* Posters qui se chevauchent */
+      .posters-container {
+        position: relative;
+        width: 300px;
+        height: 450px;
+        margin: 40px auto;
+        perspective: 1000px;
       }
 
       .poster {
+        position: absolute;
         width: 200px;
         height: 300px;
         object-fit: cover;
         border: 3px solid #ffd700;
         border-radius: 5px;
-        transition: transform 0.3s;
+        transition: all 0.5s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        transform-origin: bottom center;
       }
 
-      .poster:hover {
-        transform: scale(1.05);
+      .poster:nth-child(1) {
+        transform: rotate(-10deg) translateY(0);
+        z-index: 4;
+      }
+
+      .poster:nth-child(2) {
+        transform: rotate(-5deg) translateY(20px);
+        z-index: 3;
+        filter: brightness(0.9);
+      }
+
+      .poster:nth-child(3) {
+        transform: rotate(5deg) translateY(40px);
+        z-index: 2;
+        filter: brightness(0.8);
+      }
+
+      .poster:nth-child(4) {
+        transform: rotate(10deg) translateY(60px);
+        z-index: 1;
+        filter: brightness(0.7);
+      }
+
+      .posters-container:hover .poster:nth-child(1) {
+        transform: rotate(-15deg) translateY(-20px);
+      }
+
+      .posters-container:hover .poster:nth-child(2) {
+        transform: rotate(-5deg) translateY(0);
+      }
+
+      .posters-container:hover .poster:nth-child(3) {
+        transform: rotate(5deg) translateY(0);
+      }
+
+      .posters-container:hover .poster:nth-child(4) {
+        transform: rotate(15deg) translateY(-20px);
       }
 
       .footer {
@@ -128,17 +177,27 @@
           font-size: 1.2rem;
         }
 
-        .countdown {
-          font-size: 3rem;
+        .countdown-circle {
+          width: 250px;
+          height: 250px;
+        }
+
+        .countdown-time {
+          font-size: 2.5rem;
         }
 
         .theme {
           font-size: 2rem;
         }
 
+        .posters-container {
+          width: 250px;
+          height: 380px;
+        }
+
         .poster {
-          width: 150px;
-          height: 225px;
+          width: 160px;
+          height: 240px;
         }
       }
     </style>
@@ -149,9 +208,13 @@
       <h2 class="subtitle">SAURAS-TU DEVINER LE THÈME?</h2>
     </div>
 
-    <div class="countdown-container">
-      <div class="countdown" id="countdown">29</div>
+    <div class="countdown-circle">
+      <div class="countdown-time" id="countdown-days">29</div>
       <div class="countdown-label">JOURS</div>
+      <div class="countdown-time" id="countdown-hours">12</div>
+      <div class="countdown-label">HEURES</div>
+      <div class="countdown-time" id="countdown-minutes">45</div>
+      <div class="countdown-label">MINUTES</div>
     </div>
 
     <div class="theme">WESTERN</div>
@@ -160,34 +223,41 @@
       UNE SEULE DE CES PISTES EST LA BONNE...<br />A TOI DE LA TROUVER!
     </p>
 
-    <div class="posters">
+    <div class="posters-container">
       <!-- Remplace ces noms de fichiers par les noms de tes images -->
-      <img src="poster1.jpg" alt="Affiche 1" class="poster" />
-      <img src="poster2.jpg" alt="Affiche 2" class="poster" />
-      <img src="poster3.jpg" alt="Affiche 3" class="poster" />
-      <img src="poster4.jpg" alt="Affiche 4" class="poster" />
+      <img src="poster1.png" alt="Affiche 1" class="poster" />
+      <img src="poster2.png" alt="Affiche 2" class="poster" />
+      <img src="poster3.png" alt="Affiche 3" class="poster" />
+      <img src="poster4.png" alt="Affiche 4" class="poster" />
     </div>
 
     <div class="footer">RENDEZ-VOUS A LA KERMESSE POUR LE DECOUVRIR</div>
 
     <script>
-      // Configuration de la date cible
+      // Configuration de la date cible (29 jours à partir de maintenant)
       const targetDate = new Date();
-      targetDate.setDate(targetDate.getDate() + 29); // 29 jours à partir d'aujourd'hui
+      targetDate.setDate(targetDate.getDate() + 29);
+      targetDate.setHours(19, 0, 0, 0); // Définir à 19h00
 
       function updateCountdown() {
         const now = new Date();
         const distance = targetDate - now;
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor(
+          (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+        );
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-        document.getElementById("countdown").textContent = days;
+        document.getElementById("countdown-days").textContent = days;
+        document.getElementById("countdown-hours").textContent = hours;
+        document.getElementById("countdown-minutes").textContent = minutes;
 
         if (distance < 0) {
           clearInterval(countdownInterval);
-          document.getElementById("countdown").textContent = "0";
-          document.querySelector(".countdown-label").textContent =
-            "C'EST MAINTENANT!";
+          document.getElementById("countdown-days").textContent = "0";
+          document.getElementById("countdown-hours").textContent = "0";
+          document.getElementById("countdown-minutes").textContent = "0";
         }
       }
 
