@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>La Kermesse Approche...</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap");
+      @import url("https://fonts.cdnfonts.com/css/nasalization");
 
       * {
         margin: 0;
@@ -15,8 +15,8 @@
 
       body {
         background-color: #1a1a1a;
-        color: #6698fd; /* Or moins flashy */
-        font-family: "Oswald", sans-serif;
+        color: #0b3d91;
+        font-family: "Nasalization", sans-serif; /* Police NASA */
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -33,24 +33,44 @@
       }
 
       .title {
-        font-family: "Bebas Neue", sans-serif;
+        font-family: "Nasalization", sans-serif; /* Police NASA */
         font-size: 4rem;
         letter-spacing: 3px;
         text-transform: uppercase;
         margin-bottom: 10px;
-        text-shadow: 2px 2px 0px #8b0000; /* Ombre réduite */
-        color: #6698fd; /* Or moins flashy */
+        color: #0b3d91;
       }
 
       .subtitle {
+        font-family: "Nasalization", sans-serif; /* Police NASA */
         font-size: 1.8rem;
         margin-bottom: 20px;
         text-transform: uppercase;
         letter-spacing: 2px;
-        color: #6698fd; /* Or moins flashy */
+        color: #fc3d21;
       }
 
-      /* Compteur style cercle */
+      .timer-display {
+        font-family: "Nasalization", sans-serif; /* Police NASA */
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        text-align: center;
+        width: 100px;
+      }
+
+      .footer {
+        font-family: "Nasalization", sans-serif; /* Police NASA */
+        margin-top: 20px;
+        font-size: 1.5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #6698fd;
+      }
+
+      /* Le reste du CSS reste inchangé */
       .timer-container {
         margin: 30px 0;
         text-align: center;
@@ -69,18 +89,8 @@
         max-width: 600px;
       }
 
-      .timer-display {
-        font-size: 50px;
-        background-color: transparent;
-        border: none;
-        color: #fff;
-        text-align: center;
-        width: 100px;
-        font-family: "Bebas Neue", sans-serif;
-      }
-
       .timer-separator {
-        color: #d4af37; /* Or moins flashy */
+        color: #d4af37;
         font-size: 50px;
         padding: 0 10px;
       }
@@ -116,7 +126,6 @@
         }
       }
 
-      /* Disposition horizontale sombre des posters */
       .posters-container {
         display: flex;
         gap: 30px;
@@ -139,7 +148,6 @@
         filter: brightness(0.9);
       }
 
-      /* Positionnement vertical des posters */
       .poster:nth-child(1) {
         transform: rotate(-5deg) translateY(0);
         z-index: 4;
@@ -169,15 +177,6 @@
         filter: brightness(1.1);
         box-shadow: 0 15px 30px rgba(102, 152, 253, 0.4);
         z-index: 10;
-      }
-
-      .footer {
-        margin-top: 20px;
-        font-size: 1.5rem;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: #6698fd; /* Or moins flashy */
       }
 
       @media (max-width: 768px) {
@@ -263,7 +262,6 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Mise à jour de l'affichage
         document.getElementById("days").textContent = String(days).padStart(
           2,
           "0",
