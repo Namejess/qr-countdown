@@ -12,75 +12,10 @@
         padding: 0;
         box-sizing: border-box;
       }
-      main {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
 
-      .timer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        background-color: #000;
-        position: relative;
-        padding: 20px;
-        padding-right: 5px;
-      }
-
-      .timer-display {
-        font-size: 50px;
-        background-color: transparent;
-        border: none;
-        color: #fff;
-        text-align: center;
-        width: 100px;
-      }
-
-      .timer-separator {
-        color: #fff;
-        font-size: 50px;
-        padding-left: 8px;
-        padding-right: 17px;
-      }
-
-      .timer:before,
-      .timer:after {
-        content: "";
-        position: absolute;
-        background: linear-gradient(
-          to bottom right,
-          rgba(2, 99, 225, 1),
-          rgba(235, 24, 54, 1)
-        );
-        z-index: -1;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-        border-radius: 10px;
-        top: -2px;
-        left: -2px;
-        background-size: 500%;
-        animation: wandernderFarbverlauf 40s infinite;
-      }
-
-      @keyframes wandernderFarbverlauf {
-        0% {
-          background-position: 0 0;
-        }
-        50% {
-          background-position: 500% 0;
-        }
-        100% {
-          background-position: 0 0;
-        }
-      }
       body {
         background-color: #1a1a1a;
-        color: #ffd700;
+        color: #6698fd; /* Or moins flashy */
         font-family: "Oswald", sans-serif;
         min-height: 100vh;
         display: flex;
@@ -103,7 +38,8 @@
         letter-spacing: 3px;
         text-transform: uppercase;
         margin-bottom: 10px;
-        text-shadow: 3px 3px 0px #8b0000;
+        text-shadow: 2px 2px 0px #8b0000; /* Ombre réduite */
+        color: #6698fd; /* Or moins flashy */
       }
 
       .subtitle {
@@ -111,55 +47,82 @@
         margin-bottom: 20px;
         text-transform: uppercase;
         letter-spacing: 2px;
+        color: #6698fd; /* Or moins flashy */
       }
 
-      /* Compteur original */
-      .countdown-container {
-        text-align: center;
+      /* Compteur style cercle */
+      .timer-container {
         margin: 30px 0;
-      }
-
-      #countdown {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 5rem;
-        color: #ffd700;
-        text-shadow: 3px 3px 0px #8b0000;
-        margin-bottom: 10px;
-      }
-
-      .countdown-label {
-        font-size: 1.5rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      .theme {
-        font-size: 3rem;
-        font-family: "Bebas Neue", sans-serif;
-        color: #ffffff;
-        text-shadow: 2px 2px 0px #8b0000;
-        margin: 20px 0;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      .clue {
-        font-size: 1.3rem;
         text-align: center;
-        max-width: 600px;
-        margin: 20px auto;
-        line-height: 1.6;
       }
 
-      /* Posters avec chevauchement modéré */
+      .timer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: #000;
+        position: relative;
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 600px;
+      }
+
+      .timer-display {
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        text-align: center;
+        width: 100px;
+        font-family: "Bebas Neue", sans-serif;
+      }
+
+      .timer-separator {
+        color: #d4af37; /* Or moins flashy */
+        font-size: 50px;
+        padding: 0 10px;
+      }
+
+      .timer:before,
+      .timer:after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(
+          to bottom right,
+          rgba(2, 99, 225, 0.7),
+          rgba(235, 24, 54, 0.7)
+        );
+        z-index: -1;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border-radius: 10px;
+        top: -2px;
+        left: -2px;
+        background-size: 500%;
+        animation: wandernderFarbverlauf 40s infinite;
+      }
+
+      @keyframes wandernderFarbverlauf {
+        0% {
+          background-position: 0 0;
+        }
+        50% {
+          background-position: 500% 0;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
+
+      /* Posters avec chevauchement vertical */
       .posters-container {
         position: relative;
         width: 100%;
-        max-width: 800px;
-        height: 350px;
+        max-width: 300px;
+        height: 450px;
         margin: 40px auto;
-        display: flex;
-        justify-content: center;
       }
 
       .poster {
@@ -167,37 +130,40 @@
         width: 200px;
         height: 300px;
         object-fit: cover;
-        border: 3px solid #ffd700;
+        border: 3px solid #6698fd; /* Or moins flashy */
         border-radius: 5px;
         transition: all 0.5s ease;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        transform-origin: bottom center;
       }
 
-      /* Positionnement initial des posters */
+      /* Positionnement vertical des posters */
       .poster:nth-child(1) {
-        transform: translateX(-150px) rotate(-5deg);
+        transform: rotate(-5deg) translateY(0);
         z-index: 4;
+        left: 50px;
       }
 
       .poster:nth-child(2) {
-        transform: translateX(-50px) rotate(-2deg);
+        transform: rotate(-2deg) translateY(40px);
         z-index: 3;
+        left: 30px;
       }
 
       .poster:nth-child(3) {
-        transform: translateX(50px) rotate(2deg);
+        transform: rotate(2deg) translateY(80px);
         z-index: 2;
+        left: 10px;
       }
 
       .poster:nth-child(4) {
-        transform: translateX(150px) rotate(5deg);
+        transform: rotate(5deg) translateY(120px);
         z-index: 1;
+        left: -10px;
       }
 
-      /* Effet hover - les posters s'écartent */
+      /* Effet hover */
       .poster:hover {
-        transform: scale(1.1) rotate(0deg) !important;
+        transform: scale(1.1) rotate(0deg) translateY(-20px) !important;
         z-index: 10 !important;
         filter: brightness(1.1);
       }
@@ -208,6 +174,7 @@
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 2px;
+        color: #6698fd; /* Or moins flashy */
       }
 
       @media (max-width: 768px) {
@@ -219,33 +186,34 @@
           font-size: 1.2rem;
         }
 
-        #countdown {
-          font-size: 3rem;
+        .timer-display {
+          font-size: 30px;
+          width: 60px;
         }
 
-        .theme {
-          font-size: 2rem;
+        .timer-separator {
+          font-size: 30px;
         }
 
         .poster {
-          width: 120px;
-          height: 180px;
+          width: 150px;
+          height: 225px;
         }
 
         .poster:nth-child(1) {
-          transform: translateX(-90px) rotate(-5deg);
+          left: 30px;
         }
 
         .poster:nth-child(2) {
-          transform: translateX(-30px) rotate(-2deg);
+          left: 20px;
         }
 
         .poster:nth-child(3) {
-          transform: translateX(30px) rotate(2deg);
+          left: 10px;
         }
 
         .poster:nth-child(4) {
-          transform: translateX(90px) rotate(5deg);
+          left: 0;
         }
       }
     </style>
@@ -256,7 +224,7 @@
       <h2 class="subtitle">SAURAS-TU DEVINER LE THÈME?</h2>
     </div>
 
-    <main>
+    <div class="timer-container">
       <div class="timer">
         <div class="timer-display" id="days">00</div>
         <p class="timer-separator">:</p>
@@ -266,13 +234,9 @@
         <p class="timer-separator">:</p>
         <div class="timer-display" id="seconds">00</div>
       </div>
-      <div class="start-stop" id="event-status">
-        <p>Événement à venir</p>
-      </div>
-    </main>
+    </div>
 
     <div class="posters-container">
-      <!-- Remplace par tes fichiers PNG -->
       <img src="poster1.png" alt="Affiche 1" class="poster" />
       <img src="poster2.png" alt="Affiche 2" class="poster" />
       <img src="poster3.png" alt="Affiche 3" class="poster" />
@@ -282,8 +246,9 @@
     <div class="footer">RENDEZ-VOUS A LA KERMESSE POUR LE DECOUVRIR</div>
 
     <script>
-      // Configuration de la date cible (29 jours à partir de maintenant)
-      const targetDate = new Date("2025-05-10T00:00:00");
+      // Date du reveal: 10 mai 2025 à minuit
+      const targetDate = new Date("2025-05-10T23:00:00");
+
       function updateCountdown() {
         const now = new Date();
         const distance = targetDate - now;
@@ -295,13 +260,28 @@
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("countdown").textContent =
-          `${days}j ${hours}h ${minutes}m ${seconds}s`;
+        // Mise à jour de l'affichage
+        document.getElementById("days").textContent = String(days).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("hours").textContent = String(hours).padStart(
+          2,
+          "0",
+        );
+        document.getElementById("minutes").textContent = String(
+          minutes,
+        ).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(
+          seconds,
+        ).padStart(2, "0");
 
         if (distance < 0) {
           clearInterval(countdownInterval);
-          document.getElementById("countdown").textContent =
-            "C'est maintenant!";
+          document.getElementById("days").textContent = "00";
+          document.getElementById("hours").textContent = "00";
+          document.getElementById("minutes").textContent = "00";
+          document.getElementById("seconds").textContent = "00";
         }
       }
 
