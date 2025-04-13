@@ -12,7 +12,72 @@
         padding: 0;
         box-sizing: border-box;
       }
+      main {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
+      .timer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        background-color: #000;
+        position: relative;
+        padding: 20px;
+        padding-right: 5px;
+      }
+
+      .timer-display {
+        font-size: 50px;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        text-align: center;
+        width: 100px;
+      }
+
+      .timer-separator {
+        color: #fff;
+        font-size: 50px;
+        padding-left: 8px;
+        padding-right: 17px;
+      }
+
+      .timer:before,
+      .timer:after {
+        content: "";
+        position: absolute;
+        background: linear-gradient(
+          to bottom right,
+          rgba(2, 99, 225, 1),
+          rgba(235, 24, 54, 1)
+        );
+        z-index: -1;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+        border-radius: 10px;
+        top: -2px;
+        left: -2px;
+        background-size: 500%;
+        animation: wandernderFarbverlauf 40s infinite;
+      }
+
+      @keyframes wandernderFarbverlauf {
+        0% {
+          background-position: 0 0;
+        }
+        50% {
+          background-position: 500% 0;
+        }
+        100% {
+          background-position: 0 0;
+        }
+      }
       body {
         background-color: #1a1a1a;
         color: #ffd700;
@@ -191,16 +256,20 @@
       <h2 class="subtitle">SAURAS-TU DEVINER LE THÈME?</h2>
     </div>
 
-    <div class="countdown-container">
-      <div id="countdown">29 JOURS</div>
-      <div class="countdown-label">TEMPS RESTANT</div>
-    </div>
-
-    <div class="theme"></div>
-
-    <p class="clue">
-      UNE SEULE DE CES PISTES EST LA BONNE...<br />A TOI DE LA TROUVER!
-    </p>
+    <main>
+      <div class="timer">
+        <div class="timer-display" id="days">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="hours">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="minutes">00</div>
+        <p class="timer-separator">:</p>
+        <div class="timer-display" id="seconds">00</div>
+      </div>
+      <div class="start-stop" id="event-status">
+        <p>Événement à venir</p>
+      </div>
+    </main>
 
     <div class="posters-container">
       <!-- Remplace par tes fichiers PNG -->
