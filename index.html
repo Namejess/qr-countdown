@@ -15,10 +15,10 @@
 
       body {
         margin: 0;
-        overflow: hidden;
+        background: #000;
       }
 
-      /* Image en plein écran */
+      /* Conteneur image */
       .posterFS {
         position: fixed;
         top: 0;
@@ -26,55 +26,98 @@
         width: 100vw;
         height: 100vh;
         z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
       }
 
-      .posterFS img {
+      /* Images */
+      .desktop-poster {
+        display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center;
       }
 
-      /* Compteur positionné en bas à droite */
+      .mobile-poster {
+        display: none;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      /* Timer */
       .timer-container {
         position: fixed;
         bottom: 20px;
         right: 20px;
         z-index: 1000;
-        padding: 15px;
-        background: rgba(0, 0, 0, 0.8);
-        border-radius: 10px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.9);
+        border-radius: 8px;
         backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
       }
 
       .timer {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 3px;
       }
 
       .timer-display {
         font-family: "Nasalization", sans-serif;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: #fff;
-        min-width: 50px;
+        min-width: 40px;
         text-align: center;
       }
 
       .timer-separator {
         color: #fc3d21;
-        font-size: 1.5rem;
-        margin: 0 2px;
+        font-size: 1.2rem;
       }
 
-      /* Animation du dégradé */
+      /* Version Mobile */
+      @media (max-width: 768px) {
+        .desktop-poster {
+          display: none;
+        }
+
+        .mobile-poster {
+          display: block;
+          object-fit: contain;
+        }
+
+        .timer-container {
+          bottom: 15px;
+          right: 23%;
+          padding: 10px;
+        }
+
+        .timer-display {
+          font-size: 1.2rem;
+          min-width: 35px;
+        }
+
+        .timer-separator {
+          font-size: 1rem;
+        }
+      }
+
+      /* Animation dégradé */
       .timer-container:before {
         content: "";
         position: absolute;
         inset: -2px;
         background: linear-gradient(
           45deg,
-          rgba(2, 99, 225, 0.7),
-          rgba(235, 24, 54, 0.7)
+          rgba(2, 99, 225, 0.5),
+          rgba(235, 24, 54, 0.5)
         );
         z-index: -1;
         border-radius: inherit;
@@ -93,28 +136,13 @@
           background-position: 0 0;
         }
       }
-
-      @media (max-width: 768px) {
-        .timer-display {
-          font-size: 1.5rem;
-          min-width: 40px;
-        }
-
-        .timer-separator {
-          font-size: 1.2rem;
-        }
-
-        .timer-container {
-          bottom: 10px;
-          right: 10px;
-          padding: 10px;
-        }
-      }
     </style>
   </head>
   <body>
+    <!-- Dans la section body -->
     <div class="posterFS">
-      <img src="poster5.jpg" alt="Affiche fullscreen" />
+      <img src="poster5.jpg" class="desktop-poster" alt="Desktop" />
+      <img src="poster6.jpg" class="mobile-poster" alt="Mobile" />
     </div>
 
     <div class="timer-container">
@@ -130,13 +158,10 @@
     </div>
 
     <script>
-      // Date du reveal: 10 mai 2025 à minuit
-      const targetDate = new Date("2025-05-10T23:00:00");
-
+      const targetDate = new Date("2025-05-24T23:00:00");
       function updateCountdown() {
         const now = new Date();
         const distance = targetDate - now;
-
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor(
           (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
@@ -167,7 +192,6 @@
           document.getElementById("seconds").textContent = "00";
         }
       }
-
       updateCountdown();
       const countdownInterval = setInterval(updateCountdown, 1000);
     </script>
