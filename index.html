@@ -6,6 +6,7 @@
     <title>La Kermesse Approche...</title>
     <style>
       @import url("https://fonts.cdnfonts.com/css/nasalization");
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
 
       * {
         margin: 0;
@@ -15,47 +16,130 @@
 
       body {
         margin: 0;
-        background: #000;
+        /* Fond gris foncé simple */
+        background-color: #1e1e1e;
+        min-height: 100vh;
       }
 
-      /* Conteneur image */
-      .posterFS {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+      /* Section conteneur principale */
+      .main-section {
+        padding: 0;
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+      }
+
+      /* Style unifié pour toutes les images avec lien */
+      .image-link {
+        display: inline-block;
+        max-width: 95%;
+        position: relative;
+        margin: 20px 0;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        border-radius: 8px;
         overflow: hidden;
       }
 
-      /* Images */
-      .desktop-poster {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+      .image-link:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
       }
 
-      .mobile-poster {
-        display: none;
-        width: auto;
-        height: auto;
+      .image {
         max-width: 100%;
-        max-height: 100%;
+        height: auto;
+        vertical-align: middle;
+        display: block;
+        border-radius: 8px;
+      }
+
+      /* Style pour la première image (avec le compteur) */
+      .main-image-container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .desktop-image {
+        display: block;
+      }
+
+      .mobile-image {
+        display: none;
+      }
+
+      /* Indice section styling */
+      .indice-section {
+        padding: 40px 20px;
+        text-align: center;
+        position: relative;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .indice-section h1 {
+        font-family: "Orbitron", sans-serif;
+        color: #00f7ff;
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 247, 255, 0.7);
+        position: relative;
+        display: inline-block;
+      }
+
+      .indice-section h1:after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #00f7ff, transparent);
+        bottom: -10px;
+        left: 10%;
+      }
+
+      /* Footer image container */
+      .footer-section {
+        width: 100%;
+        padding: 20px 0;
+        text-align: center;
+        position: relative;
+      }
+
+      /* Message qui apparaît au survol */
+      .image-link:after {
+        content: attr(data-hover-text);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .image-link:hover:after {
+        opacity: 1;
       }
 
       /* Timer */
       .timer-container {
-        position: fixed;
-        bottom: 20px;
+        position: absolute;
+        bottom: 27%;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 1000;
+        z-index: 10;
         padding: 12px;
         background: rgba(0, 0, 0, 0.9);
         border-radius: 8px;
@@ -89,20 +173,17 @@
 
       /* Version Mobile */
       @media (max-width: 768px) {
-        .desktop-poster {
+        .desktop-image {
           display: none;
         }
 
-        .mobile-poster {
+        .mobile-image {
           display: block;
-          object-fit: contain;
         }
 
         .timer-container {
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 90%;
+          bottom: 31%;
+          width: auto;
           max-width: 400px;
           min-width: unset;
           padding: 10px 15px;
@@ -111,11 +192,15 @@
         .timer-display {
           font-size: 1.2rem;
           min-width: 35px;
-          text-align: center;
         }
 
         .timer-separator {
           font-size: 1rem;
+        }
+
+        .indice-section h1 {
+          font-size: 1.8rem;
+          letter-spacing: 2px;
         }
       }
 
@@ -146,29 +231,133 @@
           background-position: 0 0;
         }
       }
+
+      /* Effet de particules pour le fond (points animés) */
+      .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .star {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: twinkle 5s infinite;
+      }
+
+      @keyframes twinkle {
+        0% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 0.8;
+        }
+        100% {
+          opacity: 0.2;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Dans la section body -->
-    <div class="posterFS">
-      <img src="poster5.jpg" class="desktop-poster" alt="Desktop" />
-      <img src="poster6.jpg" class="mobile-poster" alt="Mobile" />
-    </div>
+    <!-- Effet d'étoiles/points en arrière-plan -->
+    <div class="stars" id="stars"></div>
 
-    <div class="timer-container">
-      <div class="timer">
-        <div class="timer-display" id="days">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="hours">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="minutes">00</div>
-        <p class="timer-separator">:</p>
-        <div class="timer-display" id="seconds">00</div>
+    <!-- Section principale avec première image -->
+    <div class="main-section">
+      <div class="main-image-container">
+        <a
+          href="#"
+          class="image-link"
+          data-hover-text="La Kermesse Approche..."
+        >
+          <img src="poster5.jpg" class="image desktop-image" alt="Desktop" />
+          <img src="poster6.jpg" class="image mobile-image" alt="Mobile" />
+        </a>
+
+        <!-- Timer placé à l'intérieur du conteneur d'image -->
+        <div class="timer-container">
+          <div class="timer">
+            <div class="timer-display" id="days">00</div>
+            <p class="timer-separator">:</p>
+            <div class="timer-display" id="hours">00</div>
+            <p class="timer-separator">:</p>
+            <div class="timer-display" id="minutes">00</div>
+            <p class="timer-separator">:</p>
+            <div class="timer-display" id="seconds">00</div>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- Section indice -->
+    <div class="indice-section">
+      <h1>Premier indice</h1>
+    </div>
+
+    <!-- Image en bas de page avec lien -->
+    <div class="footer-section">
+      <a
+        href="https://youtu.be/Dkqsh0kkjFw"
+        class="image-link"
+        target="_blank"
+        data-hover-text="Regarder la vidéo"
+      >
+        <img src="poster7.jpeg" class="image" alt="Image en bas de page" />
+      </a>
+    </div>
+
     <script>
+      // Création des points animés pour le fond
+      function createStars() {
+        const starsContainer = document.getElementById("stars");
+        const starCount = 100;
+
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+
+          // Position aléatoire
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+
+          star.style.left = `${x}%`;
+          star.style.top = `${y}%`;
+
+          // Variation de la taille
+          const size = Math.random() * 2 + 1;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+
+          // Variation de l'animation
+          const delay = Math.random() * 5;
+          star.style.animationDelay = `${delay}s`;
+
+          starsContainer.appendChild(star);
+        }
+      }
+
+      // Forcer le recalcul des dimensions des images
+      window.addEventListener("load", function () {
+        createStars();
+
+        const images = document.querySelectorAll(".image");
+        images.forEach((img) => {
+          img.style.display = "none";
+          setTimeout(() => {
+            img.style.display = "";
+          }, 10);
+        });
+      });
+
       const targetDate = new Date("2025-05-24T23:00:00");
+
       function updateCountdown() {
         const now = new Date();
         const distance = targetDate - now;
@@ -202,6 +391,7 @@
           document.getElementById("seconds").textContent = "00";
         }
       }
+
       updateCountdown();
       const countdownInterval = setInterval(updateCountdown, 1000);
     </script>
