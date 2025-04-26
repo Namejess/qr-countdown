@@ -219,7 +219,15 @@
         animation: wandernderFarbverlauf 40s infinite;
         background-size: 500%;
       }
-
+      @media (hover: none) and (pointer: coarse) {
+        .image-link:after {
+          opacity: 1;
+        }
+        .image-link {
+          transform: scale(1.02);
+          box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+        }
+      }
       @keyframes wandernderFarbverlauf {
         0% {
           background-position: 0 0;
