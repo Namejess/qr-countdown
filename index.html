@@ -315,6 +315,38 @@
         opacity: 0.2;
       }
     }
+
+    /* Style pour la section centrée */
+    .center-section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .center-section .image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .center-section .image:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 768px) {
+      .center-section {
+        padding: 15px;
+      }
+
+      .center-section .image {
+        max-width: 95%;
+      }
+    }
   </style>
 </head>
 
@@ -357,15 +389,29 @@
     </a>
   </div>
 
-  <!-- Ajoutez cette section après la première section d'indice -->
+  <!-- Section indice -->
   <div class="indice-section">
     <h1>Deuxième indice</h1>
+  </div>
+  <!-- Ajoutez cette section après la première section d'indice -->
+  <div class="indice-section">
+
     <div class="video-container">
       <iframe class="video-player" src="https://www.youtube.com/embed/eHaMxKURzb4" title="Deuxième indice"
         frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
     </div>
+  </div>
+
+  <!-- Section indice -->
+  <div class="indice-section">
+    <h1>Troisième indice</h1>
+  </div>
+
+  <!-- Met l'image au centre -->
+  <div class="center-section">
+    <img src="poster8.jpeg" class="image" alt="Image en bas de page" />
   </div>
 
   <script>
