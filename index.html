@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La Kermesse Approche...</title>
+  <title>Kermesse spatiale...</title>
   <style>
     @import url("https://fonts.cdnfonts.com/css/nasalization");
     @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap");
@@ -137,7 +137,7 @@
     /* Timer */
     .timer-container {
       position: absolute;
-      bottom: 27%;
+      bottom: 2%;
       left: 50%;
       transform: translateX(-50%);
       z-index: 10;
@@ -216,7 +216,7 @@
       }
 
       .timer-container {
-        bottom: 31%;
+        bottom: 0.1%;
         width: auto;
         max-width: 400px;
         min-width: unset;
@@ -357,25 +357,32 @@
   <!-- Section principale avec première image -->
   <div class="main-section">
     <div class="main-image-container">
-      <a href="#" class="image-link" data-hover-text="La Kermesse Approche...">
-        <img src="poster5.jpg" class="image desktop-image" alt="Desktop" />
-        <img src="poster6.jpg" class="image mobile-image" alt="Mobile" />
+      <a href="#" class="image-link" data-hover-text="Kermesse spatiale...">
+        <img src="poster9.jpeg" class="image desktop-image" alt="Desktop" />
+        <img src="poster9.jpeg" class="image mobile-image" alt="Mobile" />
       </a>
-
-      <!-- Timer placé à l'intérieur du conteneur d'image -->
-      <div class="timer-container">
-        <div class="timer">
-          <div class="timer-display" id="days">00</div>
-          <p class="timer-separator">:</p>
-          <div class="timer-display" id="hours">00</div>
-          <p class="timer-separator">:</p>
-          <div class="timer-display" id="minutes">00</div>
-          <p class="timer-separator">:</p>
-          <div class="timer-display" id="seconds">00</div>
-        </div>
-      </div>
     </div>
   </div>
+
+
+  <!-- Section indice -->
+  <div class="indice-section" style="height: 15rem;">
+    <h1>Compte à rebours</h1>
+  </div>
+
+  <div class="timer-container">
+    <div class="timer">
+      <div class="timer-display" id="days">00</div>
+      <p class="timer-separator">:</p>
+      <div class="timer-display" id="hours">00</div>
+      <p class="timer-separator">:</p>
+      <div class="timer-display" id="minutes">00</div>
+      <p class="timer-separator">:</p>
+      <div class="timer-display" id="seconds">00</div>
+    </div>
+  </div>
+
+
 
   <!-- Section indice -->
   <div class="indice-section">
@@ -427,6 +434,17 @@
         allowfullscreen>
       </iframe>
     </div>
+  </div>
+
+  <!-- Section indice -->
+  <div class="indice-section">
+    <h1>Annonce kermesse</h1>
+  </div>
+
+  <!-- Met l'image au centre -->
+  <div class="center-section">
+    <img src="poster5.jpg" class="image desktop-image" alt="Desktop" />
+    <img src="poster6.jpg" class="image mobile-image" alt="Mobile" />
   </div>
 
   <script>
